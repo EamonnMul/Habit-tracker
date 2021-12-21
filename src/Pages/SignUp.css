@@ -1,0 +1,38 @@
+.form-container {
+    display: flex;
+    height: 70em;
+    background-color: #1c2237;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+
+.form-auth {
+    min-height: 30em;
+    min-width: 10em;
+    padding: 2em;
+    border: 1px solid white;
+    color: white;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.form-auth input{
+    padding: .2em;
+}
+
+.form-auth label{
+   margin-right: .8em;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    border-radius: 1em;
+   
+  }

@@ -1,24 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
-
+import './Pages/LandingPage';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+import SignUp from './Pages/SignUp';
+import LandingPage from './Pages/LandingPage';
+import HabitTracker from './components/habit-tracker';
+import SignIn from './Pages/SignIn';
+import Contex from './Pages/context/contex';
 function App() {
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Contex>
+     
+      <Routes>
+        
+        <Route path="/" element={<LandingPage />}/>
+        <Route path="/habits" element={<HabitTracker />}/>
+        <Route path="/SignUp" element={<SignUp />}/>
+        <Route path="/SignIn" element={<SignIn />}/>
+        
+
+      </Routes>
+    </Contex>
+   
   );
 }
 

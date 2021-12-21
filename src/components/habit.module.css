@@ -1,0 +1,44 @@
+.tableCell {
+  background-color: #0b5c4a;
+  
+}
+
+
+.tableCellDefault {
+  background-color: default;
+  border: 1px solid white;
+}
+
+
+
+.BottomSection {
+  
+ 
+  padding: 3em;
+}
+
+.habitContainer {
+  display: flex;
+  flex-direction: row;
+}
+.HabitDescription {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.individualDays {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+} 
+
+.individualDays div{
+  padding: 2em;
+  text-align: center;
+}
+
+.individualDays div:hover{
+ box-shadow: grey;
+ font-weight: bold;
+ 
+}
