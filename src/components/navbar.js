@@ -30,7 +30,7 @@ function Navbar() {
     const handleSignOut = () => {
         values.signout();
     }
-    console.log(values);
+    
 
     useEffect(()=>
     {showButton();}

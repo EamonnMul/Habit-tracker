@@ -15,7 +15,6 @@ const Habit = (props) =>
 
 
   
-  
 
   
   //function to handle what happens when delete button called
@@ -49,7 +48,7 @@ const Habit = (props) =>
   }
   
   
-  
+  console.log(habits, 'xxx')
   
 
 
@@ -81,9 +80,12 @@ const Habit = (props) =>
        </div>
        
       <div className={classes.individualDays}>
-       {Object.keys(habits).map((habit) =>( 
+       {Object.keys(habits).sort().map((habit,index) =>( 
        <IndividualHabit
        habit={habit}
+       key={habits.uid+habits.id+index}
+       val={Object.values(habits)[index]}
+       
        ChangeDay={ChangeDay}
        />))}
        

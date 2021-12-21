@@ -1,6 +1,6 @@
 import HabitForm from './habit-form';
 import Habit from './habit';
-import {useState, useContext} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import classes from './habit-tracker.module.css'
 import Navbar from './navbar'
 import { getFirestore, doc, setDoc, collection, addDoc, getDocs, getDoc  } from "firebase/firestore";
@@ -42,14 +42,21 @@ const handleSave =  () => {
   
 }
 
-
-getDoc(doc(db, 'spuds in space','1')).then(docSnap => {
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-  } else {
-    console.log("No such document!");
+//retrieves the habits from firebase for the user
+useEffect(() => {
+  getDoc(doc(db, 'habits','VpR0OhGbZ3R7Mc0O67pQQF39jRz2')).then(docSnap => {
+    if (docSnap.exists()) {
+      setHabits(docSnap.data().habits);
+      
+      
+    } else {
+      console.log("No such document!");
+    }
+  })
   }
-})
+, [])
+
+
 
 
 
