@@ -82,17 +82,19 @@ useEffect(() => {
         }
     )
   }
+
+
   
 
   //function to create a new day
-  const createNewDay = (id) => {
+  const createNewDay = ( id) => {
     setDayCount(dayCount + 1);
   
     habits.map(
       (habit)=>{
-        if (habit.id===id) {
+        if (habit.id===id ) {
           habit.DayCount += 1;
-          habit['day'+habit.DayCount] = false
+          habit.Days['day'+habit.DayCount] = false
           
         
         }
@@ -102,17 +104,35 @@ useEffect(() => {
 
     
   }
+
+  //function to add to the streak
+  const addToStreak = (id) => {
+    
+  
+    habits.map(
+      (habit)=>{
+        if (habit.id===id) {
+          habit.streak += 1;
+          
+        }
+        return habit;
+        })
+
+    
+  }
   //////////////////////////
-  //function to create a new day
+  //function to change a day from true to false or vice versa
   const changeDayStatus = (id,day) => {
     habits.map(
       (habit)=>{
         if (habit.id===id) {
           
-          habit[day] = !habit[day];
+          habit.Days[day] = !habit[day];
+          console.log(habit.Days[day]);
           
         }
-        console.log(habits);
+        
+  
         return habit;
         })
 
@@ -130,12 +150,6 @@ useEffect(() => {
     }  
   }
 
-  //Function to count the amount of Trues, returns a count 
-  function getOccurrence(array) {
-    var count = 0;
-    array.forEach((v) => (v === true && count++));
-    return count;
-}
 
 
 

@@ -14,7 +14,20 @@ const handleChange = (e)=>{
 
 const values = useContext(AuthContext);
 
-//console.log( values.currentUser.uid);
+//generates random id;
+let guid = () => {
+  let s4 = () => {
+      return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+  }
+  //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+
+
+
 
 
 
@@ -34,14 +47,18 @@ const handleSubmit = (e) => {
   e.preventDefault();
   props.addToHabits({
     uid: uid,
-    id:Math.floor(Math.random()*10000),
+    id: guid(),
     text: input,
+    streak: 0,
     DayCount: 5,
-    day1: false,
+    Days: {
+      day1: false,
     day2: false,
     day3: false,
     day4: false,
     day5: false
+    }
+    
   });
 
 }

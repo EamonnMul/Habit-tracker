@@ -12,7 +12,7 @@ function IndividualHabit(props) {
 
     }
 
-    console.log(props.val,state);
+
     
 
  

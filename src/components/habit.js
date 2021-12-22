@@ -1,8 +1,10 @@
 import classes from './habit.module.css';
-import {useState} from 'react';
+import {useState,useE} from 'react';
 //importing deletion icon
 import { AiFillCloseCircle, AiFillEdit } from 'react-icons/ai';
 import IndividualHabit from './individualHabit';
+
+// functional component deals with habits on the basis of a singlural object
 
 const Habit = (props) =>
 {
@@ -47,8 +49,22 @@ const Habit = (props) =>
   
   }
   
+    //Function to count the amount of Trues, returns a count 
+    function getOccurrence(array) {
+      var count = 0;
+      array.forEach((v) => (v === true && count++));
+      return count;
+  }
   
-  console.log(habits, 'xxx')
+
+
+  //printing the number of times that true appears for the first object in the habits array
+  console.log(getOccurrence(Object.values(habits.Days)));
+  
+  
+ 
+    
+  
   
 
 
@@ -73,21 +89,19 @@ const Habit = (props) =>
        />
        </div>
 
-       <div className="NumberOfDays">
-
-         {streak}
-
-       </div>
+      
        
       <div className={classes.individualDays}>
-       {Object.keys(habits).sort().map((habit,index) =>( 
-       <IndividualHabit
-       habit={habit}
-       key={habits.uid+habits.id+index}
-       val={Object.values(habits)[index]}
-       
-       ChangeDay={ChangeDay}
-       />))}
+       {Object.keys(habits.Days).sort().map((habit,index) =>( 
+          
+          <IndividualHabit
+          habit={habit}
+          key={habits.uid+habits.id+index}
+          val={habits.Days[habit]}
+          ChangeDay={ChangeDay}
+          />
+         
+       ))}
        
        </div>
   </div>
