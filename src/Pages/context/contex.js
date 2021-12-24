@@ -6,18 +6,25 @@ export const AuthContext = React.createContext()
 function Contex({ children }) {
     const [currentUser, setCurrentUser] = useState()
     const [SignedOut, setSignedOut] = useState(true)
+    const [error, seterror] = useState('')
+    const [message, setmessage] = useState('')
 
 
     const auth = getAuth();
 
     const signout = () => {
         signOut(auth).then(() => {
-            console.log('Sign out successful');
+            setmessage('Sign out successful');
         }).catch((error) => {
-          // An error happened.
+          seterror('Sign out unsuccessful');
         });
         
     }
+
+    useEffect(() => {
+     seterror('');
+     setmessage('') ;
+    }, [])
 
   
 
@@ -28,17 +35,20 @@ function Contex({ children }) {
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
-          console.log(user)
+          console.log(user);
+          seterror("");
           // ...
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          alert(errorMessage);
+          seterror(errorMessage);
           // ..
         });
         
       }
+
+
       useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -46,6 +56,7 @@ function Contex({ children }) {
               // https://firebase.google.com/docs/reference/js/firebase.User
               setCurrentUser(user);
               setSignedOut(false);
+
               // ...
             } else {
               setSignedOut(true);
@@ -55,15 +66,19 @@ function Contex({ children }) {
       }, [])
 
     const SignIn = (auth,email,pw) => {
+      seterror('');
         signInWithEmailAndPassword(auth, email, pw)
         .then((userCredential) => {
             // Signed in 
             const user = userCredential.user;
+            seterror("");
+            setmessage("Sign in successful")
             // ...
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            seterror(errorMessage);
         });  
         
     }
@@ -79,7 +94,9 @@ function Contex({ children }) {
         CreateUser,
         SignIn,
         currentUser,
-        SignedOut
+        SignedOut,
+        error,
+        message
         
     }
 

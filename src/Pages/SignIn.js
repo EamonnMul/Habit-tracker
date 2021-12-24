@@ -11,10 +11,11 @@ import {AuthContext} from '../Pages/context/contex'
 function SignIn() {
     const [email,setEmail] = useState('')
     const [pw, setPw] = useState('')
+    const [message, setmessage] = useState('')
 
     const values = useContext(AuthContext);
 
-    console.log(values.currentUser.uid);
+    
 
 
 
@@ -28,11 +29,13 @@ function SignIn() {
       setPw(e.target.value);
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+
       values.SignIn(auth, email,pw);
     }
 
-    alert(values.SignedOut);
+    
     
   
 
@@ -49,12 +52,17 @@ function SignIn() {
               </label>
               <label htmlFor="" onChange={handlePw} className="email">
                   Password
-                  <input type="text" />
+                  <input type="password" />
               </label>
         
               <button  className="submit-button">Submit</button>
+              <div className="message-box">
+                <p className="message">{values.error}</p>
+            
+            </div>
 
           </form>
+        
         </div>
         </>
     )

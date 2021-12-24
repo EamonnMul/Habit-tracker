@@ -21,9 +21,10 @@ export default function Signup() {
 
     const [email,setEmail] = useState('')
     const [pw, setPw] = useState('')
-    const confirmPasswordReset = useRef()
+    const [confirmPw,setconfirmPw] = useState('')
     const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    const [message, setmessage] = useState('')
   
    
     const values = useContext(AuthContext);
@@ -44,15 +45,30 @@ export default function Signup() {
     
 
     const handleSubmit = (e) => {
+
      e.preventDefault();
-     console.log( pw, email);
-     values.CreateUser(email,pw);
+     setmessage('');
+     if (confirmPw == pw) {
+      console.log( pw, email);
+      values.CreateUser(email,pw);
+     } else {
+       setmessage('Passwords do not match');
+       return;
+     }
+     
+    }
+
+    const handleConfirm = (e) => {
+      setconfirmPw(e.target.value)
+
     }
     
     
+   
+   
+    
     
 
-    
   
 
   
@@ -76,20 +92,25 @@ export default function Signup() {
               </label>
               <label htmlFor="" onChange={handlePw} className="email">
                   Password
-                  <input type="text" />
+                  <input type="password" />
               </label>
-              <label htmlFor="" ref={confirmPasswordReset} className="email">
+              <label htmlFor="" onChange={handleConfirm} className="email">
                   Confirm Password
-                  <input type="text" />
+                  <input type="password" />
               </label>
 
               <button  className="submit-button ">Submit</button>
 
               <div className="signIn">
                 <h3>Already a user?</h3>
+
+
                 <Link to='/SignIn'>
-                <button className="submit-button ">Sign In</button>
+                <a >Sign In</a>
                 </Link>
+          </div>
+          <div className="message-box">
+            <p>{message}{ values.error}</p>
           </div>
 
           </form>

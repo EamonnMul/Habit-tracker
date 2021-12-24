@@ -1,5 +1,6 @@
 import {useState, useEffect, useContext} from 'react';
 import { AuthContext } from '../Pages/context/contex';
+import './habit-form.css';
 
 const HabitForm = (props) =>
 {
@@ -68,7 +69,7 @@ return (
   <div>
   <form onSubmit={handleSubmit}>
   <label> 
-   <input
+   <input className={'form'}
    type='text'
    onChange={handleChange}
    value={input}
@@ -76,7 +77,7 @@ return (
    />
   </label>
 
-  <button onClick={handleSubmit}>Add Habit</button>
+  <button className={'btn'} onClick={handleSubmit}>Add Habit</button>
 
   </form>
 

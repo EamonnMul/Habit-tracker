@@ -23,8 +23,11 @@
 }
 .HabitDescription {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  min-width: 10em;
+  justify-content: space-between;
+
 }
 .individualDays {
   display: flex;
@@ -41,4 +44,29 @@
  box-shadow: grey;
  font-weight: bold;
  
+}
+
+.btn {
+  font: inherit;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #092981;
+  color: white;
+  border: 1px solid #2528a8;
+  margin: .5rem 1rem;
+}
+
+.btn:hover {
+  background-color: #9c1458;
+  border-color: #9c1458;
+}
+
+.btn--alt {
+  background-color: transparent;
+  color: #2528a8 ;
+}
+
+.btn--alt:hover {
+  background-color: #f8dae9;
 }

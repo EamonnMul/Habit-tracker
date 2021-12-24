@@ -7,6 +7,7 @@ import  { homeObjOne, homeObjTwo, homeObjThree, homeObjFour } from '../component
 import Footer from './Footer/Footer';
 
 
+
 const LandingPage = () => {
     
     return (
@@ -24,6 +25,8 @@ const LandingPage = () => {
             <div className="Footer">
                 <Footer />
             </div>
+           
+           
                 
            
             

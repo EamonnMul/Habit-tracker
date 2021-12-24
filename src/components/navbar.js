@@ -7,6 +7,8 @@ import {Button} from './button'
 import  './navbar.css';
 import {IconContext} from 'react-icons/lib';
 import {AuthContext} from '../Pages/context/contex'
+import Modal from './Modal';
+import Backdrop from './backdrop';
 
 
 
@@ -14,6 +16,7 @@ import {AuthContext} from '../Pages/context/contex'
 function Navbar() {
     const [click, setClick] = useState(false);
     const [button,setButton] = useState(true);
+    const [modal, setModal] = useState(false)
     const values = useContext(AuthContext);
 
 
@@ -28,9 +31,17 @@ function Navbar() {
     }
 
     const handleSignOut = () => {
+        
+        setModal(!modal);
+    }
+
+    const signOut = () => {
         values.signout();
     }
     
+    
+    
+  
 
     useEffect(()=>
     {showButton();}
@@ -66,44 +77,47 @@ function Navbar() {
                         
                     </li>
                     <li  className="nav-btn">
-                        {values.SignedOut &&
+                        {!values.SignedOut?
+                        (
 
                         <div>
-                                  {button?
-                        ( 
+                                
+                         
                            
                                 <Button buttonStyle='btn--outline' onClick={handleSignOut}>Log Out</Button>
                             
-                        ):
-                        ( 
-                           
-                                <Button buttonStyle='btn--outline' buttonSize='btn-mobile' onClick={handleSignOut}>Log Out</Button>
-                            
-                        )
-
-                        }
                         </div>
+                        ):(
+                        
+                            <div  className="nav-btn">
+                            {button?
+                                ( 
+                                    <Link to='/signup' className='btn-link'>
+                                        <Button buttonStyle='btn--outline'>Sign Up</Button>
+                                    </Link>
+                                ):
+                                ( 
+                                    <Link  to='signup' className='btn-link'>
+                                        <Button buttonStyle='btn--outline' buttonSize='btn-mobile'>Sign Up</Button>
+                                    </Link>
+                                )
+        
+                                }
+                            </div>
+                        
+
+                        
+                        )
+                       
                         
                         
                         
                         }
                   
                         
-                    </li>
-                    <li  className="nav-btn">
-                        {button?
-                        ( 
-                            <Link to='/signup' className='btn-link'>
-                                <Button buttonStyle='btn--outline'>Sign Up</Button>
-                            </Link>
-                        ):
-                        ( 
-                            <Link  to='signup' className='btn-link'>
-                                <Button buttonStyle='btn--outline' buttonSize='btn-mobile'>Sign Up</Button>
-                            </Link>
-                        )
-
-                        }
+                    
+                    
+                       
                         
                     </li>
 
@@ -111,6 +125,8 @@ function Navbar() {
                 </ul>
             </div>
         </div>
+        {modal && <Backdrop/>}
+        {modal && <Modal yesclick={signOut} cancel= {handleSignOut} text={'Are you sure you want to logout?'}/>}
         </IconContext.Provider>
         </>
     )

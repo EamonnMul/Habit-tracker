@@ -80,7 +80,7 @@ const Habit = (props) =>
             <input type='text' placeholder='Edit habit' onChange={handleEditChange}></input>
           </form>
          :habits.text}
-       <button 
+       <button className={classes.btn}
        onClick={handleAddDay}
        >Add Day</button>
        <AiFillEdit onClick={handleEdit}/>

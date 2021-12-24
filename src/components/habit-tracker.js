@@ -174,6 +174,17 @@ useEffect(() => {
 
    
     <div className={classes.X}>
+    <div className="save-habits">
+    {!values.SignedOut?
+                        ( 
+                                <button className={classes.btn} onClick={handleSave}>Save Habits</button>
+                        ):
+                        ( 
+                              <></>
+                        )
+
+                        }
+    </div>
     {habits.map((habit) =>
     (
      <Habit
@@ -190,17 +201,7 @@ useEffect(() => {
     ))}
     </div>
 
-    <div className="save-habits">
-    {!values.SignedOut?
-                        ( 
-                                <button onClick={handleSave}>Save Habits</button>
-                        ):
-                        ( 
-                              <></>
-                        )
-
-                        }
-    </div>
+   
    
    
     </div>
