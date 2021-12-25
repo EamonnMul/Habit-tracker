@@ -83,8 +83,9 @@ const Habit = (props) =>
        <button className={classes.btn}
        onClick={handleAddDay}
        >Add Day</button>
-       <AiFillEdit onClick={handleEdit}/>
-       <AiFillCloseCircle
+       <AiFillEdit className={classes.menu}
+       onClick={handleEdit}/>
+       <AiFillCloseCircle className={classes.menu}
        onClick={handleDeletion}
        />
        </div>
