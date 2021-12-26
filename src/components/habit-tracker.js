@@ -5,6 +5,9 @@ import classes from './habit-tracker.module.css'
 import Navbar from './navbar'
 import { getFirestore, doc, setDoc, collection, addDoc, getDocs, getDoc  } from "firebase/firestore";
 import { AuthContext } from '../Pages/context/contex';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+
 
 
 
@@ -13,11 +16,14 @@ const HabitTracker = () => {
    
    
   //store Habits - initialize with a blank array
+  const values = useContext(AuthContext);
   const [habits,setHabits] = useState([]);
+  const [uid, setuid] = useState('')
+  
 
   const [dayCount, setDayCount] = useState(6)
-
-  const values = useContext(AuthContext);
+  
+  
 
   //function to add to the habits array
   const addToHabits = (habit) => {
@@ -27,6 +33,8 @@ const HabitTracker = () => {
 
   }
 
+ ;
+
   //sending to google firebase
 
   const db = getFirestore();
@@ -34,7 +42,6 @@ const HabitTracker = () => {
   
 
 
-//console.log(values.SignedOut, values.currentUser.uid);
 
 const handleSave =  () => {
   setDoc(doc(db, 'habits',values.currentUser.uid), 
@@ -42,32 +49,17 @@ const handleSave =  () => {
   
 }
 
-//retrieves the habits from firebase for the user
-useEffect(() => {
-  getDoc(doc(db, 'habits','VpR0OhGbZ3R7Mc0O67pQQF39jRz2')).then(docSnap => {
-    if (docSnap.exists()) {
-      setHabits(docSnap.data().habits);
-      
-      
-    } else {
-      console.log("No such document!");
-    }
-  })
-  }
-, [])
-
-
-
-
 
 
 
    
   //function to remove a given habit from the habits array
   const removeFromHabits = (id) => {
+    
     const filteredArray = habits.filter(
       habit => habit.id !== id
     );
+    console.log(filteredArray);
     setHabits(filteredArray);
   }
   //function to edit habits
@@ -120,6 +112,34 @@ useEffect(() => {
 
     
   }
+
+  //retrieves the habits from firebase for the user
+  const auth = getAuth();
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    getDoc(doc(db, 'habits',uid)).then(docSnap => {
+      if (docSnap.exists()) {
+   const habits = docSnap.data().habits;
+    
+    
+  } else {
+    console.log("No such document!");
+  }
+})
+    
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
+
+
+
+
   //////////////////////////
   //function to change a day from true to false or vice versa
   const changeDayStatus = (id,day) => {

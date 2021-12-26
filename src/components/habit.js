@@ -1,5 +1,5 @@
 import classes from './habit.module.css';
-import {useState,useE} from 'react';
+import {useState, useEffect} from 'react';
 //importing deletion icon
 import { AiFillCloseCircle, AiFillEdit } from 'react-icons/ai';
 import IndividualHabit from './individualHabit';
@@ -22,6 +22,7 @@ const Habit = (props) =>
   //function to handle what happens when delete button called
 
   const handleDeletion = () => {
+    
     props.removeFromHabits(habits.id);
   }
   //fucntion to
@@ -46,6 +47,7 @@ const Habit = (props) =>
 
   const ChangeDay = (day) => {
     props.changeDayStatus(habits.id,day);
+    setstreak(getOccurrence(Object.values(habits.Days)));
   
   }
   
@@ -59,7 +61,11 @@ const Habit = (props) =>
 
 
   //printing the number of times that true appears for the first object in the habits array
-  console.log(getOccurrence(Object.values(habits.Days)));
+  
+
+  
+   
+  
   
   
  
@@ -88,6 +94,7 @@ const Habit = (props) =>
        <AiFillCloseCircle className={classes.menu}
        onClick={handleDeletion}
        />
+       <p>Days Completed: {streak} </p>
        </div>
 
       
