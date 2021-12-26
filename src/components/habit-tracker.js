@@ -115,27 +115,41 @@ const handleSave =  () => {
 
   //retrieves the habits from firebase for the user
   const auth = getAuth();
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    getDoc(doc(db, 'habits',uid)).then(docSnap => {
-      if (docSnap.exists()) {
-   const habits = docSnap.data().habits;
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      setuid(user.uid);
+      return uid;
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
+
+  useEffect(() => {
+    if (uid !== '') {
+      getDoc(doc(db, 'habits',uid)).then(docSnap => {
+        if (docSnap.exists()) {
+          setHabits(docSnap.data().habits);
     
     
-  } else {
-    console.log("No such document!");
+        } else {
+          console.log("No such document!");
+        }
+      })
+      
+    }
+   
+  
   }
-})
-    
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+  
+   
+  , [uid])
+
 
 
 
